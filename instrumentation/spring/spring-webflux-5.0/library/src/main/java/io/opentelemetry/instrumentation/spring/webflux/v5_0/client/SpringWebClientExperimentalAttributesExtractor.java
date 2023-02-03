@@ -15,7 +15,7 @@ import javax.annotation.Nullable;
 import org.springframework.web.reactive.function.client.ClientRequest;
 import org.springframework.web.reactive.function.client.ClientResponse;
 
-final class SpringWebfluxExperimentalAttributesExtractor
+final class SpringWebClientExperimentalAttributesExtractor
     implements AttributesExtractor<ClientRequest, ClientResponse> {
 
   private static final AttributeKey<String> SPRING_WEBFLUX_EVENT =

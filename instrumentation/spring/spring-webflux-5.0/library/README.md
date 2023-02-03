@@ -59,9 +59,9 @@ implementation("org.springframework:spring-webflux:SPRING_VERSION")
 
 ### Features
 
-#### `SpringWebfluxTracing`
+#### `SpringWebClientTelemetry`
 
-`SpringWebfluxTracing` emits client span for each request sent using `WebClient` by implementing
+`SpringWebClientTelemetry` emits client span for each request sent using `WebClient` by implementing
 the [ExchangeFilterFunction](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/reactive/function/client/ExchangeFilterFunction.html)
 interface. An example is shown below:
 
@@ -70,7 +70,7 @@ interface. An example is shown below:
 ```java
 
 import io.opentelemetry.api.OpenTelemetry;
-import io.opentelemetry.instrumentation.spring.webflux.client.SpringWebfluxTracing;
+import io.opentelemetry.instrumentation.spring.webflux.client.SpringWebClientTelemetry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -83,10 +83,10 @@ public class WebClientConfig {
    @Bean
    public WebClient.Builder webClient(OpenTelemetry openTelemetry) {
 
-      WebClient webClient = WebClient.create();
-      SpringWebfluxTracing instrumentation = SpringWebfluxTracing.create(openTelemetry);
+     WebClient webClient = WebClient.create();
+     SpringWebClientTelemetry instrumentation = SpringWebClientTelemetry.create(openTelemetry);
 
-      return webClient.mutate().filters(instrumentation::addClientTracingFilter);
+     return webClient.mutate().filters(instrumentation::addClientTracingFilter);
    }
 }
 ```
