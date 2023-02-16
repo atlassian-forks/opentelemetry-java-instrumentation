@@ -15,7 +15,7 @@ import org.springframework.web.reactive.function.client.ClientResponse;
  * This class is internal and is hence not for public use. Its APIs are unstable and can change at
  * any time.
  */
-public final class SpringWebClientNetAttributesGetter
+public final class SpringWebfluxNetAttributesGetter
     implements NetClientAttributesGetter<ClientRequest, ClientResponse> {
 
   @Override

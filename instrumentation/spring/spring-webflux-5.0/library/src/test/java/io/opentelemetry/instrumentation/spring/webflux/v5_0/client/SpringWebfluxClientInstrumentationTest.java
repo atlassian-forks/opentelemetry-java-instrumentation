@@ -19,8 +19,8 @@ class SpringWebfluxClientInstrumentationTest
 
   @Override
   protected WebClient.Builder instrument(WebClient.Builder builder) {
-    SpringWebClientTelemetry instrumentation =
-        SpringWebClientTelemetry.create(testing.getOpenTelemetry());
+    SpringWebfluxTelemetry instrumentation =
+        SpringWebfluxTelemetry.create(testing.getOpenTelemetry());
     return builder.filters(instrumentation::addClientTracingFilter);
   }
 }

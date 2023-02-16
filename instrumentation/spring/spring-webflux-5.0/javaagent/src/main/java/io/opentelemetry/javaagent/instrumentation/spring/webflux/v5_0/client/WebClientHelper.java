@@ -7,8 +7,8 @@ package io.opentelemetry.javaagent.instrumentation.spring.webflux.v5_0.client;
 
 import io.opentelemetry.api.GlobalOpenTelemetry;
 import io.opentelemetry.instrumentation.api.instrumenter.net.PeerServiceAttributesExtractor;
-import io.opentelemetry.instrumentation.spring.webflux.v5_0.client.SpringWebClientTelemetry;
-import io.opentelemetry.instrumentation.spring.webflux.v5_0.client.internal.SpringWebClientNetAttributesGetter;
+import io.opentelemetry.instrumentation.spring.webflux.v5_0.client.SpringWebfluxTelemetry;
+import io.opentelemetry.instrumentation.spring.webflux.v5_0.client.internal.SpringWebfluxNetAttributesGetter;
 import io.opentelemetry.javaagent.bootstrap.internal.CommonConfig;
 import io.opentelemetry.javaagent.bootstrap.internal.InstrumentationConfig;
 import java.util.List;
@@ -16,13 +16,13 @@ import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
 
 public final class WebClientHelper {
 
-  private static final SpringWebClientTelemetry INSTRUMENTATION =
-      SpringWebClientTelemetry.builder(GlobalOpenTelemetry.get())
+  private static final SpringWebfluxTelemetry INSTRUMENTATION =
+      SpringWebfluxTelemetry.builder(GlobalOpenTelemetry.get())
           .setCapturedRequestHeaders(CommonConfig.get().getClientRequestHeaders())
           .setCapturedResponseHeaders(CommonConfig.get().getClientResponseHeaders())
           .addAttributesExtractor(
               PeerServiceAttributesExtractor.create(
-                  new SpringWebClientNetAttributesGetter(),
+                  new SpringWebfluxNetAttributesGetter(),
                   CommonConfig.get().getPeerServiceMapping()))
           .setCaptureExperimentalSpanAttributes(
               InstrumentationConfig.get()

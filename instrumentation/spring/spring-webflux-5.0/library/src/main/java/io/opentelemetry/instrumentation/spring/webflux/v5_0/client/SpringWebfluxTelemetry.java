@@ -14,27 +14,27 @@ import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
 
 /** Entrypoint for instrumenting Spring Webflux HTTP clients. */
-public final class SpringWebClientTelemetry {
+public final class SpringWebfluxTelemetry {
 
   /**
-   * Returns a new {@link SpringWebClientTelemetry} configured with the given {@link OpenTelemetry}.
+   * Returns a new {@link SpringWebfluxTelemetry} configured with the given {@link OpenTelemetry}.
    */
-  public static SpringWebClientTelemetry create(OpenTelemetry openTelemetry) {
+  public static SpringWebfluxTelemetry create(OpenTelemetry openTelemetry) {
     return builder(openTelemetry).build();
   }
 
   /**
-   * Returns a new {@link SpringWebClientTelemetryBuilder} configured with the given {@link
+   * Returns a new {@link SpringWebfluxTelemetryBuilder} configured with the given {@link
    * OpenTelemetry}.
    */
-  public static SpringWebClientTelemetryBuilder builder(OpenTelemetry openTelemetry) {
-    return new SpringWebClientTelemetryBuilder(openTelemetry);
+  public static SpringWebfluxTelemetryBuilder builder(OpenTelemetry openTelemetry) {
+    return new SpringWebfluxTelemetryBuilder(openTelemetry);
   }
 
   private final Instrumenter<ClientRequest, ClientResponse> instrumenter;
   private final ContextPropagators propagators;
 
-  SpringWebClientTelemetry(
+  SpringWebfluxTelemetry(
       Instrumenter<ClientRequest, ClientResponse> instrumenter, ContextPropagators propagators) {
     this.instrumenter = instrumenter;
     this.propagators = propagators;

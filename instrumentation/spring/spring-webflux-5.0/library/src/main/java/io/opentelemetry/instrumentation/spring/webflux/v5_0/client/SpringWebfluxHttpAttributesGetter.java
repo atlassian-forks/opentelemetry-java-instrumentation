@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
 import org.springframework.web.reactive.function.client.ClientRequest;
 import org.springframework.web.reactive.function.client.ClientResponse;
 
-enum SpringWebClientHttpAttributesGetter
+enum SpringWebfluxHttpAttributesGetter
     implements HttpClientAttributesGetter<ClientRequest, ClientResponse> {
   INSTANCE;
 
