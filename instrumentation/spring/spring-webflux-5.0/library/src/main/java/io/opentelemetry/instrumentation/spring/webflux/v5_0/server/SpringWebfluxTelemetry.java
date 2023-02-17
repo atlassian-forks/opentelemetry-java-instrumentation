@@ -7,7 +7,7 @@ package io.opentelemetry.instrumentation.spring.webflux.v5_0.server;
 
 import io.opentelemetry.api.OpenTelemetry;
 import io.opentelemetry.instrumentation.api.instrumenter.Instrumenter;
-import io.opentelemetry.instrumentation.reactor.ContextPropagationOperator;
+import io.opentelemetry.instrumentation.reactor.v3_1.ContextPropagationOperator;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 
@@ -22,7 +22,7 @@ public final class SpringWebfluxTelemetry {
     return new SpringWebfluxTelemetryBuilder(openTelemetry);
   }
 
-  public static void registerReactorHook() {
+  private static void registerReactorHook() {
     ContextPropagationOperator.builder().build().registerOnEachOperator();
   }
 
@@ -32,5 +32,10 @@ public final class SpringWebfluxTelemetry {
 
   public TelemetryProducingWebFilter createWebFilter() {
     return new TelemetryProducingWebFilter(instrumenter);
+  }
+
+  public TelemetryProducingWebFilter createWebFilterAndRegisterReactorHook() {
+    registerReactorHook();
+    return this.createWebFilter();
   }
 }

@@ -13,7 +13,6 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 enum SpringWebfluxNetAttributesGetter implements NetServerAttributesGetter<ServerHttpRequest> {
   INSTANCE;
 
-  @Nullable
   @Override
   public String getTransport(ServerHttpRequest request) {
     return SemanticAttributes.NetTransportValues.IP_TCP;

@@ -31,10 +31,7 @@ final class TelemetryProducingWebFilter implements WebFilter {
   public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
     Context parentContext = Context.current();
     Mono<Void> source = chain.filter(exchange);
-    return Mono.defer(
-        () ->
-            source.transform(
-                call -> new TelemetryWrappedMono(call, instrumenter, parentContext, exchange)));
+    return new TelemetryWrappedMono(source, instrumenter, parentContext, exchange);
   }
 
   private static class TelemetryWrappedMono extends Mono<Void> {
@@ -58,6 +55,7 @@ final class TelemetryProducingWebFilter implements WebFilter {
     @Override
     public void subscribe(CoreSubscriber<? super Void> actual) {
       if (!instrumenter.shouldStart(parentContext, exchange.getRequest())) {
+        source.subscribe(actual);
         return;
       }
       Context currentContext = instrumenter.start(parentContext, exchange.getRequest());
@@ -92,7 +90,7 @@ final class TelemetryProducingWebFilter implements WebFilter {
     }
 
     @Override
-    public void onNext(Void unsued) {}
+    public void onNext(Void unused) {}
 
     @Override
     public void onError(Throwable t) {

@@ -45,6 +45,28 @@ public final class SpringWebfluxTelemetryBuilder {
     return this;
   }
 
+  /**
+   * Configures the HTTP request headers that will be captured as span attributes.
+   *
+   * @param requestHeaders A list of HTTP header names.
+   */
+  @CanIgnoreReturnValue
+  public SpringWebfluxTelemetryBuilder setCapturedRequestHeaders(List<String> requestHeaders) {
+    httpAttributesExtractorBuilder.setCapturedRequestHeaders(requestHeaders);
+    return this;
+  }
+
+  /**
+   * Configures the HTTP response headers that will be captured as span attributes.
+   *
+   * @param responseHeaders A list of HTTP header names.
+   */
+  @CanIgnoreReturnValue
+  public SpringWebfluxTelemetryBuilder setCapturedResponseHeaders(List<String> responseHeaders) {
+    httpAttributesExtractorBuilder.setCapturedResponseHeaders(responseHeaders);
+    return this;
+  }
+
   public SpringWebfluxTelemetry build() {
     SpringWebfluxHttpAttributesGetter attributesGetter = SpringWebfluxHttpAttributesGetter.INSTANCE;
 
