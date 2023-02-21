@@ -39,10 +39,9 @@ import reactor.core.publisher.Flux;
 @SpringBootApplication
 class TestWebfluxSpringBootApp {
 
-  static ConfigurableApplicationContext start(int port, String contextPath) {
+  static ConfigurableApplicationContext start(int port) {
     Properties props = new Properties();
     props.put("server.port", port);
-    props.put("spring.webflux.base-path", contextPath);
 
     SpringApplication app = new SpringApplication(TestWebfluxSpringBootApp.class);
     app.setDefaultProperties(props);
